@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet HIMYM Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <h1>HIMYM Map with Leaflet</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([40.758, -73.985], 13);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers
+        const locations = [
+            { name: "MacLaren’s Pub", coords: [40.7596, -73.9837], description: "The gang's favorite bar." },
+            { name: "Ted’s Apartment", coords: [40.7332, -73.9996], description: "Ted, Marshall, and Lily’s apartment." },
+            { name: "Dowisetrepla Apartment", coords: [40.7265, -74.0020], description: "Marshall and Lily’s first owned apartment." },
+            { name: "Barney’s Apartment", coords: [40.7632, -73.9787], description: "Barney’s playbook headquarters." },
+            { name: "Staten Island Home", coords: [40.5795, -74.1502], description: "Marshall’s childhood home." },
+            { name: "Laser Tag Arena", coords: [40.7505, -73.9934], description: "Barney’s favorite laser tag place." }
+        ];
+
+        locations.forEach(location => {
+            L.marker(location.coords).addTo(map)
+                .bindPopup(`<h3>${location.name}</h3><p>${location.description}</p>`);
+        });
+    </script>
+
+</body>
+</html>
+
